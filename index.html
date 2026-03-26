@@ -1,538 +1,1193 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Terrava Agro — Barren Today. Alive Tomorrow.</title>
+<title>Terrava Agro Consultancy — Barren Today. Alive Tomorrow.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-:root {
-  --green-deep:   #2C4A1E;
-  --green-mid:    #3D6B28;
-  --green-light:  #6B9E3A;
-  --green-pale:   #A8C080;
-  --earth-dark:   #7A5C3A;
-  --earth-mid:    #A85D2A;
-  --earth-light:  #C9BC8A;
-  --cream:        #F7F4EF;
-  --cream-warm:   #EFE8D8;
-  --stone:        #8B8578;
-  --stone-light:  #D9D5CC;
-  --white:        #FDFBF8;
-  --body-text:    #3A3530;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  color: var(--body-text);
-  overflow-x: hidden;
+:root{
+–ink:       #0A100C;
+–forest:    #12201A;
+–fern:      #1E3D26;
+–moss:      #2D5C38;
+–sage:      #508A42;
+–leaf:      #7DB85E;
+–reed:      #AECF8A;
+–gold:      #C8922A;
+–amber:     #E6B04A;
+–clay:      #7A4C2E;
+–parchment: #F5EDD4;
+–cream:     #FAF6E8;
+–paper:     #FDFAF2;
+–ash:       #EAE6D8;
+–warmgray:  #8A8070;
+–border:    rgba(18,32,26,0.1);
+–border-inv:rgba(174,207,138,0.12);
 }
 
-/* ─── LOGO MARK SVG ─── */
-.logomark { display: inline-block; flex-shrink: 0; }
+html{scroll-behavior:smooth}
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 20px 64px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(253,251,248,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 0.5px solid rgba(217,213,204,0.6);
-  transition: padding 0.3s ease;
-}
-.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-wordmark { display: flex; flex-direction: column; }
-.nav-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: 0.02em; line-height: 1; }
-.nav-sub  { font-size: 8px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: var(--stone); margin-top: 3px; }
-.nav-links { display: flex; align-items: center; gap: 40px; }
-.nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.08em; color: var(--stone); text-decoration: none; transition: color 0.2s; }
-.nav-links a:hover { color: var(--green-deep); }
-.nav-cta {
-  padding: 10px 24px;
-  background: var(--green-deep);
-  color: var(--cream-warm) !important;
-  border-radius: 6px;
-  font-size: 11px !important;
-  letter-spacing: 0.14em !important;
-  text-transform: uppercase;
-  transition: background 0.2s !important;
-}
-.nav-cta:hover { background: var(--green-mid) !important; color: var(--cream-warm) !important; }
-
-/* ─── HERO ─── */
-.hero {
-  min-height: 100vh;
-  background: var(--green-deep);
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: flex-start;
-  padding: 120px 64px 80px;
-  position: relative; overflow: hidden;
-}
-.hero-bg-circle1 {
-  position: absolute; top: -100px; right: -100px;
-  width: 500px; height: 500px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(168,192,128,0.1) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-bg-circle2 {
-  position: absolute; bottom: -150px; left: 30%;
-  width: 700px; height: 700px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(107,158,58,0.07) 0%, transparent 60%);
-  pointer-events: none;
-}
-.hero-grain {
-  position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
-.hero-eyebrow {
-  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--green-pale); margin-bottom: 28px;
-  display: flex; align-items: center; gap: 16px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
-}
-.hero-eyebrow::before { content: ''; width: 32px; height: 0.5px; background: var(--green-pale); }
-.hero-headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(54px, 7vw, 96px);
-  font-weight: 700; color: var(--cream-warm);
-  line-height: 1.05; letter-spacing: 0.01em;
-  max-width: 760px;
-  opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
-}
-.hero-headline .accent { color: var(--green-pale); }
-.hero-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-style: italic; color: var(--earth-light);
-  margin-top: 24px; letter-spacing: 0.04em;
-  opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards;
-}
-.hero-body {
-  font-size: 14px; font-weight: 300; color: rgba(239,232,216,0.65);
-  max-width: 460px; line-height: 1.85; margin-top: 28px;
-  opacity: 0; animation: fadeUp 0.9s ease 0.75s forwards;
-}
-.hero-actions {
-  display: flex; gap: 16px; margin-top: 44px;
-  opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards;
-}
-.btn-primary {
-  padding: 15px 36px;
-  background: var(--green-pale);
-  color: var(--green-deep);
-  border-radius: 6px; border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-primary:hover { background: #BDD494; transform: translateY(-1px); }
-.btn-ghost {
-  padding: 15px 36px;
-  background: transparent;
-  color: var(--cream-warm);
-  border-radius: 6px; border: 0.5px solid rgba(239,232,216,0.3); cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.2s, background 0.2s;
-}
-.btn-ghost:hover { border-color: rgba(239,232,216,0.6); background: rgba(239,232,216,0.05); }
-.hero-stat-strip {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  display: flex;
-  border-top: 0.5px solid rgba(168,192,128,0.15);
-  opacity: 0; animation: fadeUp 0.9s ease 1.1s forwards;
-}
-.hero-stat {
-  flex: 1; padding: 28px 48px;
-  border-right: 0.5px solid rgba(168,192,128,0.1);
-}
-.hero-stat:last-child { border-right: none; }
-.stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--green-pale); line-height: 1; }
-.stat-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(239,232,216,0.4); margin-top: 6px; }
-
-/* ─── INTRO BAND ─── */
-.intro-band {
-  padding: 80px 64px;
-  background: var(--cream);
-  border-bottom: 0.5px solid var(--stone-light);
-  display: flex; align-items: center; justify-content: space-between; gap: 64px;
-}
-.intro-left { max-width: 520px; }
-.section-eyebrow {
-  font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--earth-mid); margin-bottom: 16px;
-  display: flex; align-items: center; gap: 12px;
-}
-.section-eyebrow::before { content: ''; width: 24px; height: 0.5px; background: var(--earth-mid); }
-.intro-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 40px; font-weight: 700; color: var(--green-deep);
-  line-height: 1.15; letter-spacing: 0.01em;
-}
-.intro-heading em { font-style: italic; color: var(--earth-mid); }
-.intro-body {
-  font-size: 14px; font-weight: 300; color: #5A5450;
-  line-height: 1.9; margin-top: 20px;
-}
-.intro-right {
-  display: flex; flex-direction: column; gap: 24px; min-width: 280px;
-}
-.intro-pill {
-  background: var(--white);
-  border: 0.5px solid var(--stone-light);
-  border-radius: 12px; padding: 18px 24px;
-  display: flex; align-items: center; gap: 16px;
-}
-.pill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.pill-text { font-size: 12px; color: var(--green-deep); font-weight: 400; letter-spacing: 0.04em; }
-
-/* ─── SERVICES ─── */
-.services { padding: 100px 64px; background: var(--white); }
-.section-header { margin-bottom: 56px; }
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px; font-weight: 700; color: var(--green-deep);
-  line-height: 1.1; letter-spacing: 0.01em;
-}
-.section-title em { font-style: italic; color: var(--earth-mid); }
-.section-sub {
-  font-size: 14px; font-weight: 300; color: var(--stone);
-  margin-top: 14px; max-width: 480px; line-height: 1.8; letter-spacing: 0.02em;
-}
-.services-grid {
-  display: grid; grid-template-columns: 1.2fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 16px;
-}
-.service-card {
-  border-radius: 16px; padding: 40px 36px;
-  position: relative; overflow: hidden;
-  transition: transform 0.25s ease;
-}
-.service-card:hover { transform: translateY(-3px); }
-.sc-span { grid-row: 1 / 3; }
-.sc-1 { background: var(--green-deep); }
-.sc-2 { background: var(--cream); border: 0.5px solid var(--stone-light); }
-.sc-3 { background: var(--earth-mid); }
-.sc-4 { background: var(--cream-warm); border: 0.5px solid var(--earth-light); }
-.sc-5 { background: var(--green-mid); }
-.service-num {
-  font-family: 'Playfair Display', serif; font-size: 13px;
-  letter-spacing: 0.08em; margin-bottom: 24px; opacity: 0.4;
-}
-.service-icon { margin-bottom: 20px; }
-.service-name {
-  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.service-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; line-height: 1.25;
-}
-.service-desc {
-  font-size: 13px; font-weight: 300; line-height: 1.8;
-  margin-top: 16px; opacity: 0.75;
-}
-.on-dark .service-num, .on-dark .service-name, .on-dark .service-heading { color: var(--cream-warm); }
-.on-dark .service-desc { color: rgba(239,232,216,0.7); }
-.on-mid .service-num, .on-mid .service-name, .on-mid .service-heading { color: var(--cream-warm); }
-.on-mid .service-desc { color: rgba(239,232,216,0.7); }
-.on-cream .service-num { color: var(--stone); }
-.on-cream .service-name { color: var(--earth-mid); }
-.on-cream .service-heading { color: var(--green-deep); }
-.on-cream .service-desc { color: #5A5450; }
-.on-earth .service-num, .on-earth .service-heading, .on-earth .service-name { color: var(--cream-warm); }
-.on-earth .service-desc { color: rgba(239,232,216,0.75); }
-
-/* ─── PROCESS ─── */
-.process {
-  padding: 100px 64px;
-  background: var(--green-deep);
-  position: relative; overflow: hidden;
-}
-.process::before {
-  content: '';
-  position: absolute; top: 0; right: 0; bottom: 0;
-  width: 40%; pointer-events: none;
-  background: radial-gradient(ellipse at right, rgba(168,192,128,0.07) 0%, transparent 65%);
-}
-.process-header { margin-bottom: 64px; }
-.process-eyebrow {
-  font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--green-pale); margin-bottom: 16px;
-  display: flex; align-items: center; gap: 12px;
-}
-.process-eyebrow::before { content: ''; width: 24px; height: 0.5px; background: var(--green-pale); }
-.process-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px; font-weight: 700; color: var(--cream-warm);
-  line-height: 1.1;
-}
-.process-title em { font-style: italic; color: var(--green-pale); }
-.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-.process-step {
-  padding: 36px 32px;
-  border-left: 0.5px solid rgba(168,192,128,0.15);
-}
-.process-step:first-child { border-left: none; }
-.step-num {
-  font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700;
-  color: rgba(168,192,128,0.12); line-height: 1;
-}
-.step-name {
-  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--green-pale); margin-top: 16px; margin-bottom: 10px;
-}
-.step-title {
-  font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600;
-  color: var(--cream-warm); line-height: 1.2;
-}
-.step-desc {
-  font-size: 12px; font-weight: 300; color: rgba(239,232,216,0.55);
-  line-height: 1.85; margin-top: 12px;
+body{
+background:var(–paper);
+font-family:‘DM Sans’,sans-serif;
+color:var(–forest);
+overflow-x:hidden;
+cursor:none;
 }
 
-/* ─── TESTIMONIALS ─── */
-.testimonials { padding: 100px 64px; background: var(--cream); }
-.testimonials-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px; }
-.testi-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
-.testi-card {
-  background: var(--white);
-  border: 0.5px solid var(--stone-light);
-  border-radius: 16px; padding: 40px;
-  display: flex; flex-direction: column; justify-content: space-between;
+/* ── CURSOR ── */
+.cursor{
+position:fixed;width:10px;height:10px;
+background:var(–gold);border-radius:50%;
+pointer-events:none;z-index:9999;
+transform:translate(-50%,-50%);
+transition:width .15s,height .15s,background .15s;
+mix-blend-mode:difference;
 }
-.testi-card.featured {
-  background: var(--green-deep);
-  border-color: transparent;
+.cursor-ring{
+position:fixed;width:36px;height:36px;
+border:1px solid rgba(200,146,42,0.5);
+border-radius:50%;pointer-events:none;z-index:9998;
+transform:translate(-50%,-50%);
+transition:all .08s linear;
 }
-.testi-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-style: italic; font-weight: 400;
-  line-height: 1.65; color: var(--green-deep); letter-spacing: 0.02em;
-}
-.featured .testi-quote { color: var(--cream-warm); font-size: 22px; }
-.testi-rule { width: 32px; height: 0.5px; background: var(--earth-light); margin: 24px 0; }
-.featured .testi-rule { background: rgba(168,192,128,0.4); }
-.testi-author { font-size: 12px; font-weight: 500; color: var(--green-deep); letter-spacing: 0.04em; }
-.testi-farm  { font-size: 10px; color: var(--stone); margin-top: 3px; letter-spacing: 0.06em; }
-.featured .testi-author { color: var(--cream-warm); }
-.featured .testi-farm   { color: var(--green-pale); }
-.testi-stack { display: flex; flex-direction: column; gap: 20px; }
-.testi-small { background: var(--white); border: 0.5px solid var(--stone-light); border-radius: 14px; padding: 28px 32px; }
-.testi-small .testi-quote { font-size: 15px; }
+body:hover .cursor{opacity:1}
 
-/* ─── ABOUT / CREDENTIALS ─── */
-.about {
-  padding: 100px 64px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  background: var(--white);
-}
-.about-visual {
-  background: var(--cream);
-  border-radius: 20px; padding: 48px;
-  border: 0.5px solid var(--stone-light);
-  position: relative;
-}
-.about-logo-big {
-  display: flex; align-items: center; gap: 24px;
-  margin-bottom: 36px;
-}
-.about-name-big {
-  font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700;
-  color: var(--green-deep); line-height: 1;
-}
-.about-sub-big {
-  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--stone); margin-top: 6px;
-}
-.about-tagline-big {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 18px; color: var(--earth-mid); margin-top: 8px;
-}
-.about-divider { height: 0.5px; background: var(--stone-light); margin: 28px 0; }
-.cred-list { display: flex; flex-direction: column; gap: 14px; }
-.cred-item { display: flex; align-items: center; gap: 14px; }
-.cred-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); flex-shrink: 0; }
-.cred-text { font-size: 12px; color: #5A5450; font-weight: 300; letter-spacing: 0.02em; }
-.about-text-side {}
-.about-body { font-size: 14px; font-weight: 300; color: #5A5450; line-height: 1.95; }
-.about-body + .about-body { margin-top: 20px; }
-.about-values { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
-.value-item { padding: 18px 20px; background: var(--cream); border-radius: 10px; border: 0.5px solid var(--stone-light); }
-.value-name { font-size: 11px; font-weight: 500; color: var(--green-deep); letter-spacing: 0.06em; }
-.value-desc { font-size: 11px; font-weight: 300; color: var(--stone); margin-top: 4px; line-height: 1.6; }
-
-/* ─── CONTACT / CTA ─── */
-.contact-section {
-  padding: 100px 64px;
-  background: var(--cream-warm);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
-  border-top: 0.5px solid var(--stone-light);
-}
-.contact-left {}
-.contact-heading {
-  font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700;
-  color: var(--green-deep); line-height: 1.1; letter-spacing: 0.01em;
-}
-.contact-heading em { font-style: italic; color: var(--earth-mid); }
-.contact-sub { font-size: 14px; font-weight: 300; color: #5A5450; margin-top: 18px; line-height: 1.85; max-width: 380px; }
-.contact-details { margin-top: 40px; display: flex; flex-direction: column; gap: 18px; }
-.contact-detail { display: flex; gap: 16px; align-items: flex-start; }
-.cd-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); margin-bottom: 4px; }
-.cd-value { font-size: 13px; color: var(--green-deep); font-weight: 400; line-height: 1.6; }
-.contact-form { background: var(--white); border-radius: 16px; padding: 44px; border: 0.5px solid var(--stone-light); }
-.form-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--green-deep); margin-bottom: 28px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-.form-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); }
-.form-input, .form-select, .form-textarea {
-  padding: 12px 16px; background: var(--cream);
-  border: 0.5px solid var(--stone-light); border-radius: 8px;
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--green-deep);
-  outline: none; transition: border-color 0.2s;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--green-light);
-}
-.form-textarea { resize: vertical; min-height: 100px; }
-.form-btn {
-  width: 100%; padding: 14px; background: var(--green-deep);
-  color: var(--cream-warm); border: none; border-radius: 8px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  transition: background 0.2s;
-}
-.form-btn:hover { background: var(--green-mid); }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--green-deep);
-  padding: 56px 64px 36px;
-}
-.footer-top {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding-bottom: 40px;
-  border-bottom: 0.5px solid rgba(168,192,128,0.15);
-}
-.footer-brand {}
-.footer-name { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--cream-warm); }
-.footer-sub  { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-pale); margin-top: 4px; }
-.footer-tag  { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--earth-light); margin-top: 6px; }
-.footer-cols { display: flex; gap: 60px; }
-.footer-col {}
-.footer-col-title { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-pale); margin-bottom: 16px; }
-.footer-col a, .footer-col p {
-  display: block; font-size: 12px; font-weight: 300;
-  color: rgba(239,232,216,0.55); text-decoration: none;
-  line-height: 1; margin-bottom: 12px; letter-spacing: 0.04em;
-  transition: color 0.2s;
-}
-.footer-col a:hover { color: var(--cream-warm); }
-.footer-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  padding-top: 28px;
-}
-.footer-copy { font-size: 10px; color: rgba(239,232,216,0.3); letter-spacing: 0.08em; }
-.footer-reg { font-size: 10px; color: rgba(239,232,216,0.25); letter-spacing: 0.06em; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* ── GRAIN OVERLAY ── */
+body::after{
+content:’’;position:fixed;inset:0;
+background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 200 200’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events:none;z-index:9000;opacity:.45;
 }
 
-/* ─── SCROLL REVEAL ─── */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(–forest)}
+::-webkit-scrollbar-thumb{background:var(–gold)}
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  nav { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .hero { padding: 100px 24px 80px; }
-  .hero-stat-strip { flex-direction: column; }
-  .hero-stat { border-right: none; border-top: 0.5px solid rgba(168,192,128,0.1); }
-  .intro-band { flex-direction: column; padding: 60px 24px; }
-  .services { padding: 60px 24px; }
-  .services-grid { grid-template-columns: 1fr; }
-  .sc-span { grid-row: auto; }
-  .process { padding: 60px 24px; }
-  .process-steps { grid-template-columns: 1fr 1fr; }
-  .testimonials { padding: 60px 24px; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .about { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
-  .contact-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
-  footer { padding: 40px 24px 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
+/* ── PROGRESS BAR ── */
+#progress{
+position:fixed;top:0;left:0;height:2px;
+background:linear-gradient(90deg,var(–gold),var(–amber));
+z-index:9999;width:0%;transition:width .1s;
+}
+
+/* ─────── NAV ─────── */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:500;
+padding:22px 60px;
+display:flex;align-items:center;justify-content:space-between;
+transition:padding .35s ease,background .35s ease,border-color .35s;
+border-bottom:1px solid transparent;
+}
+nav.scrolled{
+padding:14px 60px;
+background:rgba(253,250,242,0.94);
+backdrop-filter:blur(16px);
+border-bottom-color:var(–border);
+}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-emblem{
+width:38px;height:38px;border-radius:50%;
+background:var(–forest);
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;
+box-shadow:0 2px 12px rgba(12,32,20,0.25);
+}
+.nav-wordmark{line-height:1}
+.nav-name{
+font-family:‘Fraunces’,serif;font-size:18px;font-weight:700;
+color:var(–paper);letter-spacing:.01em;
+transition:color .3s;
+}
+nav.scrolled .nav-name{color:var(–forest)}
+.nav-tagline{
+font-size:8px;font-weight:300;letter-spacing:.28em;
+text-transform:uppercase;color:rgba(253,250,242,.45);
+margin-top:3px;transition:color .3s;
+}
+nav.scrolled .nav-tagline{color:var(–warmgray)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{
+font-size:11px;font-weight:300;letter-spacing:.1em;text-transform:uppercase;
+color:rgba(253,250,242,.6);text-decoration:none;
+transition:color .2s;position:relative;
+}
+nav.scrolled .nav-links a{color:var(–warmgray)}
+.nav-links a::after{
+content:’’;position:absolute;bottom:-2px;left:0;right:100%;
+height:1px;background:var(–gold);transition:right .25s ease;
+}
+.nav-links a:hover::after{right:0}
+.nav-links a:hover{color:var(–paper)}
+nav.scrolled .nav-links a:hover{color:var(–forest)}
+.nav-cta{
+padding:11px 26px;
+background:var(–gold);color:var(–paper)!important;
+border-radius:40px;font-size:10px!important;
+font-weight:500!important;letter-spacing:.16em!important;
+text-transform:uppercase!important;
+transition:background .2s,transform .15s,box-shadow .2s!important;
+box-shadow:0 4px 20px rgba(200,146,42,.3);
+}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(–amber)!important;transform:translateY(-1px)!important;box-shadow:0 6px 28px rgba(200,146,42,.4)!important}
+
+/* ─────── HERO ─────── */
+.hero{
+min-height:100vh;
+background:var(–forest);
+display:grid;grid-template-columns:55% 45%;
+position:relative;overflow:hidden;
+padding-top:80px;
+}
+
+/* Background mesh */
+.hero-mesh{
+position:absolute;inset:0;pointer-events:none;
+background:
+radial-gradient(ellipse 60% 50% at 20% 80%, rgba(45,92,56,.35) 0%, transparent 70%),
+radial-gradient(ellipse 40% 60% at 90% 10%, rgba(80,138,66,.15) 0%, transparent 60%),
+radial-gradient(ellipse 80% 40% at 50% 100%, rgba(12,16,10,.8) 0%, transparent 80%);
+}
+
+/* Hero left */
+.hero-left{
+display:flex;flex-direction:column;justify-content:center;
+padding:80px 56px 120px 60px;
+position:relative;z-index:2;
+}
+
+.hero-eyebrow{
+display:flex;align-items:center;gap:14px;
+font-family:‘DM Mono’,monospace;
+font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+color:rgba(174,207,138,.7);
+margin-bottom:36px;
+}
+.hero-eyebrow-line{
+width:40px;height:1px;
+background:linear-gradient(90deg,var(–gold),transparent);
+}
+
+.hero-headline{
+font-family:‘Fraunces’,serif;
+font-size:clamp(60px,8vw,108px);
+font-weight:700;
+line-height:.96;
+letter-spacing:-.02em;
+color:var(–parchment);
+position:relative;
+}
+.hero-headline .line{
+display:block;overflow:hidden;
+}
+.hero-headline .word{
+display:inline-block;
+transform:translateY(100%);
+animation:wordReveal .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-headline .hl{
+color:var(–reed);
+font-style:italic;
+}
+.hero-headline .hl-gold{
+color:var(–amber);
+}
+@keyframes wordReveal{
+to{transform:translateY(0)}
+}
+
+.hero-divider{
+display:flex;align-items:center;gap:16px;
+margin:28px 0;
+opacity:0;animation:fadeIn .6s ease 1.1s forwards;
+}
+.hero-divider-line{
+flex:1;max-width:60px;height:1px;
+background:linear-gradient(90deg,var(–gold),rgba(200,146,42,.2));
+}
+.hero-divider-text{
+font-family:‘Fraunces’,serif;font-style:italic;
+font-size:16px;color:rgba(245,237,212,.55);letter-spacing:.04em;
+}
+
+.hero-body{
+font-size:14px;font-weight:300;
+color:rgba(245,237,212,.55);
+max-width:420px;line-height:1.9;
+opacity:0;animation:fadeIn .7s ease 1.25s forwards;
+}
+
+.hero-actions{
+display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;
+opacity:0;animation:fadeIn .7s ease 1.4s forwards;
+}
+.btn-primary{
+display:inline-flex;align-items:center;gap:10px;
+padding:16px 36px;
+background:var(–gold);color:var(–paper);
+border-radius:50px;border:none;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;
+font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+text-decoration:none;
+transition:background .2s,transform .2s,box-shadow .2s;
+box-shadow:0 6px 28px rgba(200,146,42,.35);
+}
+.btn-primary:hover{background:var(–amber);transform:translateY(-2px);box-shadow:0 10px 36px rgba(200,146,42,.45)}
+.btn-primary svg{transition:transform .2s}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{
+display:inline-flex;align-items:center;gap:10px;
+padding:16px 32px;
+background:transparent;color:rgba(245,237,212,.8);
+border-radius:50px;
+border:1px solid rgba(245,237,212,.2);cursor:pointer;
+font-family:‘DM Sans’,sans-serif;
+font-size:11px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;
+text-decoration:none;
+transition:border-color .2s,background .2s,color .2s;
+}
+.btn-ghost:hover{border-color:rgba(245,237,212,.5);background:rgba(245,237,212,.05)}
+
+/* Hero right - botanical emblem */
+.hero-right{
+display:flex;align-items:center;justify-content:center;
+position:relative;z-index:2;
+padding:40px 40px 120px 20px;
+}
+
+.botanical-emblem{
+position:relative;width:380px;height:380px;
+flex-shrink:0;
+opacity:0;animation:fadeIn 1s ease 1.6s forwards;
+}
+.botanical-emblem svg{
+width:100%;height:100%;
+filter:drop-shadow(0 0 40px rgba(80,138,66,.2));
+}
+.emblem-rotate{
+animation:rotateSlow 30s linear infinite;
+transform-origin:150px 150px;
+}
+@keyframes rotateSlow{
+from{transform:rotate(0deg)}to{transform:rotate(360deg)}
+}
+.plant-sway{
+animation:sway 6s ease-in-out infinite;
+transform-origin:150px 240px;
+}
+@keyframes sway{
+0%,100%{transform:rotate(0deg)}
+50%{transform:rotate(1.5deg)}
+}
+.root-pulse{
+animation:rootPulse 4s ease-in-out infinite;
+}
+@keyframes rootPulse{
+0%,100%{opacity:.4}
+50%{opacity:.7}
+}
+
+/* Hero stats strip */
+.hero-stats{
+position:absolute;bottom:0;left:0;right:0;
+display:grid;grid-template-columns:repeat(4,1fr);
+border-top:1px solid var(–border-inv);
+opacity:0;animation:fadeIn .8s ease 1.8s forwards;
+}
+.hero-stat{
+padding:24px 44px;
+border-right:1px solid var(–border-inv);
+display:flex;flex-direction:column;gap:6px;
+}
+.hero-stat:last-child{border-right:none}
+.stat-num{
+font-family:‘Fraunces’,serif;
+font-size:38px;font-weight:700;
+color:var(–reed);line-height:1;
+letter-spacing:-.02em;
+}
+.stat-label{
+font-family:‘DM Mono’,monospace;
+font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;
+color:rgba(245,237,212,.3);
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(12px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* ─────── MARQUEE ─────── */
+.marquee-strip{
+background:var(–parchment);
+border-top:1px solid rgba(18,32,26,.06);
+padding:16px 0;
+overflow:hidden;
+white-space:nowrap;
+position:relative;
+}
+.marquee-inner{
+display:inline-flex;gap:0;
+animation:marqueeScroll 28s linear infinite;
+}
+@keyframes marqueeScroll{
+from{transform:translateX(0)}
+to{transform:translateX(-50%)}
+}
+.marquee-item{
+display:inline-flex;align-items:center;gap:20px;
+padding:0 32px;
+}
+.marquee-dot{
+width:5px;height:5px;border-radius:50%;
+background:var(–gold);flex-shrink:0;
+}
+.marquee-text{
+font-family:‘DM Mono’,monospace;
+font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+color:var(–warmgray);
+}
+
+/* ─────── INTRO SECTION ─────── */
+.intro{
+background:var(–paper);
+padding:100px 60px;
+display:grid;grid-template-columns:1fr 1fr;
+gap:80px;align-items:center;
+border-bottom:1px solid var(–border);
+}
+.section-eyebrow{
+display:inline-flex;align-items:center;gap:12px;
+font-family:‘DM Mono’,monospace;
+font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
+color:var(–gold);margin-bottom:20px;
+}
+.section-eyebrow::before{
+content:’’;width:28px;height:1px;
+background:linear-gradient(90deg,var(–gold),rgba(200,146,42,.3));
+}
+.intro-heading{
+font-family:‘Fraunces’,serif;
+font-size:clamp(38px,4vw,54px);
+font-weight:700;color:var(–forest);
+line-height:1.1;letter-spacing:-.01em;
+}
+.intro-heading em{font-style:italic;color:var(–gold)}
+.intro-body{
+font-size:15px;font-weight:300;color:var(–warmgray);
+line-height:1.9;margin-top:22px;
+}
+.intro-right{
+display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.feature-card{
+background:var(–cream);
+border:1px solid var(–border);
+border-radius:14px;
+padding:24px;
+transition:transform .25s ease,box-shadow .25s ease,border-color .25s;
+}
+.feature-card:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 40px rgba(18,32,26,.08);
+border-color:rgba(200,146,42,.25);
+}
+.feature-card:nth-child(2){margin-top:20px}
+.feature-card:nth-child(4){margin-top:-20px}
+.fc-icon{
+width:36px;height:36px;border-radius:10px;
+background:var(–forest);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:14px;
+}
+.fc-title{
+font-family:‘Fraunces’,serif;
+font-size:16px;font-weight:600;color:var(–forest);
+margin-bottom:6px;line-height:1.2;
+}
+.fc-body{
+font-size:11.5px;font-weight:300;color:var(–warmgray);
+line-height:1.7;
+}
+
+/* ─────── SERVICES ─────── */
+.services{
+background:var(–cream);
+padding:100px 60px;
+border-bottom:1px solid var(–border);
+}
+.services-header{
+display:flex;justify-content:space-between;align-items:flex-end;
+margin-bottom:52px;gap:40px;flex-wrap:wrap;
+}
+.section-title{
+font-family:‘Fraunces’,serif;
+font-size:clamp(40px,5vw,62px);
+font-weight:700;color:var(–forest);
+line-height:1.05;letter-spacing:-.02em;
+}
+.section-title em{font-style:italic;color:var(–gold)}
+.section-sub{
+font-size:14px;font-weight:300;color:var(–warmgray);
+max-width:380px;line-height:1.8;text-align:right;
+}
+
+/* Bento grid */
+.bento{
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+grid-template-rows:auto auto;
+gap:14px;
+}
+.bento-card{
+border-radius:18px;
+padding:40px;
+position:relative;overflow:hidden;
+transition:transform .3s cubic-bezier(.2,0,.2,1),box-shadow .3s;
+cursor:default;
+}
+.bento-card:hover{transform:translateY(-4px)}
+.bc-dark{background:var(–forest);grid-row:1/3;box-shadow:0 8px 40px rgba(12,16,10,.3)}
+.bc-dark:hover{box-shadow:0 20px 60px rgba(12,16,10,.4)}
+.bc-gold{background:var(–gold);box-shadow:0 4px 20px rgba(200,146,42,.25)}
+.bc-gold:hover{box-shadow:0 12px 40px rgba(200,146,42,.35)}
+.bc-moss{background:var(–moss)}
+.bc-ash{background:var(–ash);border:1px solid var(–border)}
+.bc-fern{background:var(–fern)}
+
+/* Decorative bg number */
+.bc-bg-num{
+position:absolute;right:-20px;bottom:-30px;
+font-family:‘Fraunces’,serif;
+font-size:140px;font-weight:700;
+opacity:.04;line-height:1;
+pointer-events:none;
+user-select:none;
+}
+.bc-dark .bc-bg-num{color:var(–reed)}
+.bc-gold .bc-bg-num,.bc-moss .bc-bg-num,.bc-fern .bc-bg-num{color:var(–paper)}
+.bc-ash .bc-bg-num{color:var(–forest)}
+
+.bc-num{
+font-family:‘DM Mono’,monospace;
+font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+margin-bottom:24px;
+}
+.bc-dark .bc-num{color:rgba(174,207,138,.45)}
+.bc-gold .bc-num{color:rgba(253,250,242,.6)}
+.bc-moss .bc-num,.bc-fern .bc-num{color:rgba(174,207,138,.5)}
+.bc-ash .bc-num{color:var(–warmgray)}
+
+.bc-icon{
+width:44px;height:44px;border-radius:12px;
+display:flex;align-items:center;justify-content:center;
+margin-bottom:22px;
+font-size:20px;
+}
+.bc-dark .bc-icon{background:rgba(174,207,138,.1)}
+.bc-gold .bc-icon{background:rgba(253,250,242,.2)}
+.bc-moss .bc-icon,.bc-fern .bc-icon{background:rgba(174,207,138,.12)}
+.bc-ash .bc-icon{background:var(–forest);opacity:.06}
+
+.bc-label{
+font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+margin-bottom:10px;
+}
+.bc-dark .bc-label{color:var(–reed)}
+.bc-gold .bc-label{color:rgba(253,250,242,.8)}
+.bc-moss .bc-label,.bc-fern .bc-label{color:rgba(174,207,138,.7)}
+.bc-ash .bc-label{color:var(–gold)}
+
+.bc-heading{
+font-family:‘Fraunces’,serif;
+font-weight:700;line-height:1.15;letter-spacing:-.01em;
+}
+.bc-dark .bc-heading{font-size:32px;color:var(–parchment)}
+.bc-gold .bc-heading{font-size:22px;color:var(–paper)}
+.bc-moss .bc-heading,.bc-fern .bc-heading{font-size:20px;color:var(–parchment)}
+.bc-ash .bc-heading{font-size:20px;color:var(–forest)}
+
+.bc-desc{
+font-size:13px;font-weight:300;line-height:1.75;margin-top:14px;
+}
+.bc-dark .bc-desc{color:rgba(245,237,212,.55)}
+.bc-gold .bc-desc{color:rgba(253,250,242,.75)}
+.bc-moss .bc-desc,.bc-fern .bc-desc{color:rgba(245,237,212,.6)}
+.bc-ash .bc-desc{color:var(–warmgray)}
+
+.bc-footer{
+margin-top:28px;padding-top:22px;
+border-top:1px solid rgba(174,207,138,.1);
+}
+.bc-ash .bc-footer{border-top-color:var(–border)}
+.bc-includes{
+font-family:‘DM Mono’,monospace;
+font-size:9.5px;letter-spacing:.08em;
+margin-bottom:8px;
+}
+.bc-dark .bc-includes{color:rgba(174,207,138,.4)}
+.bc-includes-list{
+font-size:11.5px;font-weight:300;line-height:1.9;
+}
+.bc-dark .bc-includes-list{color:rgba(245,237,212,.4)}
+
+/* ─────── PROCESS ─────── */
+.process{
+background:var(–forest);
+padding:100px 60px;
+position:relative;overflow:hidden;
+}
+.process-bg{
+position:absolute;inset:0;pointer-events:none;
+background:
+radial-gradient(ellipse 50% 80% at 100% 50%, rgba(45,92,56,.2) 0%, transparent 70%),
+radial-gradient(ellipse 30% 60% at 0% 50%, rgba(80,138,66,.1) 0%, transparent 60%);
+}
+.process-header{
+display:flex;align-items:flex-end;justify-content:space-between;
+margin-bottom:64px;gap:40px;flex-wrap:wrap;
+position:relative;z-index:1;
+}
+.process-title{
+font-family:‘Fraunces’,serif;
+font-size:clamp(38px,5vw,60px);font-weight:700;
+color:var(–parchment);line-height:1.05;letter-spacing:-.02em;
+}
+.process-title em{font-style:italic;color:var(–reed)}
+.process-desc{
+font-size:13.5px;font-weight:300;
+color:rgba(245,237,212,.45);
+max-width:340px;line-height:1.8;
+}
+
+/* Timeline */
+.timeline{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:0;position:relative;z-index:1;
+}
+.timeline::before{
+content:’’;
+position:absolute;top:28px;left:28px;right:28px;
+height:1px;
+background:linear-gradient(90deg,var(–gold),rgba(174,207,138,.3),var(–gold));
+pointer-events:none;
+}
+.timeline-step{
+padding:0 28px 0;
+position:relative;
+}
+.timeline-step:first-child{padding-left:0}
+.timeline-step:last-child{padding-right:0}
+
+.ts-dot{
+width:56px;height:56px;border-radius:50%;
+border:1px solid rgba(200,146,42,.3);
+background:var(–forest);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:28px;
+transition:background .3s,border-color .3s;
+position:relative;z-index:1;
+}
+.timeline-step:hover .ts-dot{
+background:rgba(200,146,42,.15);
+border-color:var(–gold);
+}
+.ts-dot-num{
+font-family:‘Fraunces’,serif;
+font-size:18px;font-weight:700;
+color:var(–reed);
+}
+.ts-phase{
+font-family:‘DM Mono’,monospace;
+font-size:8.5px;letter-spacing:.25em;text-transform:uppercase;
+color:var(–gold);margin-bottom:10px;
+}
+.ts-title{
+font-family:‘Fraunces’,serif;
+font-size:22px;font-weight:600;
+color:var(–parchment);line-height:1.2;margin-bottom:14px;
+}
+.ts-body{
+font-size:12.5px;font-weight:300;
+color:rgba(245,237,212,.45);
+line-height:1.85;
+}
+
+/* ─────── NUMBERS STRIP ─────── */
+.numbers-strip{
+background:var(–ink);
+padding:64px 60px;
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:0;
+border-top:1px solid var(–border-inv);
+border-bottom:1px solid var(–border-inv);
+}
+.num-item{
+padding:0 40px;
+border-right:1px solid var(–border-inv);
+display:flex;flex-direction:column;gap:8px;
+}
+.num-item:first-child{padding-left:0}
+.num-item:last-child{padding-right:0;border-right:none}
+.big-num{
+font-family:‘Fraunces’,serif;
+font-size:clamp(48px,5vw,72px);
+font-weight:700;line-height:1;
+letter-spacing:-.03em;
+background:linear-gradient(135deg,var(–amber),var(–gold));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.num-label{
+font-family:‘DM Mono’,monospace;
+font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+color:rgba(245,237,212,.3);
+}
+.num-desc{
+font-size:13px;font-weight:300;
+color:rgba(245,237,212,.4);
+line-height:1.6;margin-top:4px;
+}
+
+/* ─────── TESTIMONIALS ─────── */
+.testimonials{
+background:var(–parchment);
+padding:100px 60px;
+position:relative;overflow:hidden;
+}
+.testi-bg-q{
+position:absolute;left:-20px;top:40px;
+font-family:‘Fraunces’,serif;
+font-size:420px;font-weight:700;
+color:rgba(18,32,26,.04);
+line-height:1;pointer-events:none;
+user-select:none;
+}
+.testi-header{
+display:flex;align-items:flex-end;justify-content:space-between;
+margin-bottom:56px;gap:40px;flex-wrap:wrap;
+position:relative;z-index:1;
+}
+.testi-grid{
+display:grid;
+grid-template-columns:1.6fr 1fr;
+gap:16px;
+position:relative;z-index:1;
+}
+.testi-card{
+background:var(–paper);
+border:1px solid rgba(18,32,26,.08);
+border-radius:20px;padding:44px;
+display:flex;flex-direction:column;justify-content:space-between;
+transition:transform .25s,box-shadow .25s;
+}
+.testi-card:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(18,32,26,.1)}
+.testi-card.featured{background:var(–forest);border-color:transparent}
+.testi-card.featured:hover{box-shadow:0 20px 60px rgba(12,16,10,.3)}
+
+.testi-open{
+font-family:‘Fraunces’,serif;
+font-size:52px;line-height:1;color:var(–gold);
+opacity:.45;display:block;margin-bottom:4px;
+}
+.testi-card.featured .testi-open{color:var(–reed)}
+
+.testi-quote{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:19px;font-weight:300;
+line-height:1.65;letter-spacing:.01em;
+}
+.testi-card:not(.featured) .testi-quote{color:var(–forest)}
+.testi-card.featured .testi-quote{color:rgba(245,237,212,.85);font-size:22px}
+
+.testi-sep{
+width:36px;height:1px;
+background:var(–gold);opacity:.4;
+margin:28px 0 20px;
+}
+.testi-card.featured .testi-sep{background:var(–reed)}
+
+.testi-author{
+font-size:12px;font-weight:500;
+color:var(–forest);letter-spacing:.04em;
+}
+.testi-card.featured .testi-author{color:var(–parchment)}
+.testi-farm{
+font-family:‘DM Mono’,monospace;
+font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+color:var(–warmgray);margin-top:4px;
+}
+.testi-card.featured .testi-farm{color:rgba(174,207,138,.55)}
+
+.testi-stack{
+display:flex;flex-direction:column;gap:16px;
+}
+.testi-small{padding:32px 36px}
+.testi-small .testi-quote{font-size:15.5px}
+
+/* ─────── ABOUT ─────── */
+.about{
+background:var(–paper);
+padding:100px 60px;
+display:grid;grid-template-columns:1fr 1fr;
+gap:80px;align-items:start;
+border-top:1px solid var(–border);
+}
+.about-visual{position:relative}
+.about-card{
+background:var(–forest);
+border-radius:24px;padding:52px;
+position:relative;overflow:hidden;
+}
+.about-card-bg{
+position:absolute;inset:0;
+background:radial-gradient(ellipse 70% 60% at 90% 0%, rgba(80,138,66,.2) 0%, transparent 60%);
+}
+.about-card-content{position:relative;z-index:1}
+.about-brand-row{
+display:flex;align-items:center;gap:18px;margin-bottom:36px;
+}
+.about-brand-name{
+font-family:‘Fraunces’,serif;
+font-size:36px;font-weight:700;
+color:var(–parchment);line-height:1;
+}
+.about-brand-sub{
+font-family:‘DM Mono’,monospace;
+font-size:8px;letter-spacing:.28em;text-transform:uppercase;
+color:rgba(174,207,138,.45);margin-top:5px;
+}
+.about-brand-tag{
+font-family:‘Fraunces’,serif;font-style:italic;
+font-size:15px;color:rgba(245,237,212,.4);margin-top:6px;
+}
+.about-divider{
+height:1px;
+background:linear-gradient(90deg,rgba(174,207,138,.2),transparent);
+margin:32px 0;
+}
+.cred-list{display:flex;flex-direction:column;gap:13px}
+.cred-item{
+display:flex;align-items:flex-start;gap:14px;
+}
+.cred-bullet{
+width:5px;height:5px;border-radius:50%;
+background:var(–reed);flex-shrink:0;margin-top:6px;
+}
+.cred-text{
+font-size:12px;font-weight:300;
+color:rgba(245,237,212,.5);line-height:1.6;letter-spacing:.02em;
+}
+.about-badge{
+position:absolute;bottom:-20px;right:40px;
+width:90px;height:90px;
+background:var(–gold);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 8px 32px rgba(200,146,42,.4);
+z-index:2;
+}
+.about-badge-text{
+font-family:‘DM Mono’,monospace;
+font-size:7px;letter-spacing:.18em;text-transform:uppercase;
+color:var(–paper);text-align:center;line-height:1.5;
+}
+
+.about-text{margin-top:8px}
+.about-body{
+font-size:15px;font-weight:300;color:var(–warmgray);
+line-height:1.95;
+}
+.about-body+.about-body{margin-top:20px}
+.about-values{
+display:grid;grid-template-columns:1fr 1fr;gap:12px;
+margin-top:40px;
+}
+.value-item{
+background:var(–cream);
+border:1px solid var(–border);
+border-radius:12px;padding:20px 22px;
+transition:border-color .2s,transform .2s;
+}
+.value-item:hover{border-color:rgba(200,146,42,.3);transform:translateY(-2px)}
+.vi-title{
+font-size:11.5px;font-weight:500;
+color:var(–forest);letter-spacing:.04em;margin-bottom:5px;
+display:flex;align-items:center;gap:8px;
+}
+.vi-title::before{
+content:’’;width:14px;height:1px;
+background:var(–gold);flex-shrink:0;
+}
+.vi-body{
+font-size:11px;font-weight:300;
+color:var(–warmgray);line-height:1.65;
+}
+
+/* ─────── CONTACT ─────── */
+.contact{
+background:var(–cream);
+padding:100px 60px;
+border-top:1px solid var(–border);
+display:grid;grid-template-columns:1fr 1.15fr;
+gap:80px;align-items:start;
+}
+.contact-intro{}
+.contact-heading{
+font-family:‘Fraunces’,serif;
+font-size:clamp(36px,4.5vw,56px);font-weight:700;
+color:var(–forest);line-height:1.08;letter-spacing:-.02em;
+}
+.contact-heading em{font-style:italic;color:var(–gold)}
+.contact-sub{
+font-size:14.5px;font-weight:300;
+color:var(–warmgray);margin-top:20px;line-height:1.85;max-width:380px;
+}
+.contact-details{margin-top:44px;display:flex;flex-direction:column;gap:22px}
+.cd-row{display:flex;gap:18px;align-items:flex-start}
+.cd-icon{
+width:38px;height:38px;border-radius:10px;
+background:var(–forest);
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;margin-top:2px;
+}
+.cd-label{
+font-family:‘DM Mono’,monospace;
+font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;
+color:var(–warmgray);margin-bottom:5px;
+}
+.cd-value{
+font-size:13.5px;color:var(–forest);
+font-weight:400;line-height:1.55;
+}
+
+/* Form */
+.contact-form{
+background:var(–paper);
+border:1px solid var(–border);
+border-radius:20px;padding:48px;
+box-shadow:0 8px 40px rgba(18,32,26,.06);
+}
+.form-title{
+font-family:‘Fraunces’,serif;
+font-size:26px;font-weight:600;
+color:var(–forest);margin-bottom:32px;
+letter-spacing:-.01em;
+}
+.form-title em{font-style:italic;color:var(–gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.form-label{
+font-family:‘DM Mono’,monospace;
+font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;
+color:var(–warmgray);
+}
+.form-input,.form-select,.form-textarea{
+padding:13px 16px;
+background:var(–cream);
+border:1px solid var(–border);border-radius:10px;
+font-family:‘DM Sans’,sans-serif;font-size:13.5px;font-weight:300;
+color:var(–forest);outline:none;
+transition:border-color .2s,box-shadow .2s;
+width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+border-color:var(–gold);
+box-shadow:0 0 0 3px rgba(200,146,42,.1);
+}
+.form-textarea{resize:vertical;min-height:96px}
+.form-select{cursor:pointer}
+.form-btn{
+width:100%;padding:16px;
+background:var(–forest);color:var(–parchment);
+border:none;border-radius:12px;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;
+font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+transition:background .2s,transform .15s,box-shadow .2s;
+margin-top:6px;
+}
+.form-btn:hover{background:var(–fern);transform:translateY(-1px);box-shadow:0 8px 28px rgba(18,32,26,.2)}
+
+/* ─────── FOOTER ─────── */
+footer{
+background:var(–ink);
+padding:72px 60px 40px;
+}
+.footer-top{
+display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;
+gap:48px;
+padding-bottom:56px;
+border-bottom:1px solid var(–border-inv);
+}
+.footer-name{
+font-family:‘Fraunces’,serif;
+font-size:32px;font-weight:700;
+color:var(–parchment);letter-spacing:-.01em;
+}
+.footer-tagline{
+font-family:‘Fraunces’,serif;font-style:italic;
+font-size:15px;color:rgba(245,237,212,.35);
+margin-top:6px;
+}
+.footer-about{
+font-size:12px;font-weight:300;
+color:rgba(245,237,212,.3);line-height:1.75;
+margin-top:16px;max-width:280px;
+}
+.footer-col-title{
+font-family:‘DM Mono’,monospace;
+font-size:8.5px;letter-spacing:.25em;text-transform:uppercase;
+color:var(–reed);margin-bottom:20px;
+}
+.footer-col a,.footer-col p{
+display:block;font-size:12.5px;font-weight:300;
+color:rgba(245,237,212,.4);text-decoration:none;
+line-height:1;margin-bottom:13px;
+transition:color .2s;
+}
+.footer-col a:hover{color:var(–parchment)}
+.footer-bottom{
+display:flex;justify-content:space-between;align-items:center;
+padding-top:28px;flex-wrap:wrap;gap:12px;
+}
+.footer-copy{
+font-family:‘DM Mono’,monospace;
+font-size:9.5px;letter-spacing:.08em;
+color:rgba(245,237,212,.2);
+}
+
+/* ─────── REVEAL ANIMATIONS ─────── */
+.reveal{
+opacity:0;transform:translateY(32px);
+transition:opacity .75s cubic-bezier(.16,1,.3,1),
+transform .75s cubic-bezier(.16,1,.3,1);
+}
+.reveal.up{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ─────── RESPONSIVE ─────── */
+@media(max-width:1024px){
+nav{padding:18px 32px}
+nav.scrolled{padding:14px 32px}
+.hero{grid-template-columns:1fr}
+.hero-right{display:none}
+.hero-left{padding:80px 32px 120px}
+.hero-stats{grid-template-columns:repeat(2,1fr)}
+.hero-stat:nth-child(2){border-right:none}
+.hero-stat:nth-child(3){border-top:1px solid var(–border-inv)}
+.intro,.about,.contact{grid-template-columns:1fr;gap:48px;padding:72px 32px}
+.services,.testimonials{padding:72px 32px}
+.process{padding:72px 32px}
+.bento{grid-template-columns:1fr 1fr}
+.bc-dark{grid-row:auto}
+.timeline{grid-template-columns:1fr 1fr}
+.timeline::before{display:none}
+.timeline-step:nth-child(3){padding-top:40px;border-top:1px solid var(–border-inv)}
+.testi-grid{grid-template-columns:1fr}
+.numbers-strip{grid-template-columns:repeat(2,1fr);padding:48px 32px}
+.num-item:nth-child(2){border-right:none}
+.num-item:nth-child(3){padding-left:0;border-top:1px solid var(–border-inv);padding-top:40px}
+.footer-top{grid-template-columns:1fr 1fr;gap:36px;padding:60px 32px 48px}
+footer{padding:56px 32px 32px}
+}
+@media(max-width:640px){
+.nav-links{display:none}
+.hero-stats{grid-template-columns:repeat(2,1fr)}
+.bento{grid-template-columns:1fr}
+.services-header{flex-direction:column}
+.section-sub{text-align:left}
+.timeline{grid-template-columns:1fr}
+.numbers-strip{grid-template-columns:1fr}
+.num-item{border-right:none!important;border-top:1px solid var(–border-inv);padding-top:32px;padding-left:0!important}
+.num-item:first-child{border-top:none;padding-top:0}
+.footer-top{grid-template-columns:1fr}
+.intro-right{grid-template-columns:1fr}
+.feature-card:nth-child(even){margin-top:0}
+.about-values{grid-template-columns:1fr}
+.form-row{grid-template-columns:1fr}
 }
 </style>
+
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
+<!-- Cursor -->
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<!-- Progress -->
+<div id="progress"></div>
+
+<!-- ─────── NAV ─────── -->
+
+<nav id="nav">
   <a href="#" class="nav-brand">
-    <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#2C4A1E"/>
-      <path d="M40 62 L40 30" stroke="#A8C080" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M40 46 Q30 39 25 28 Q34 29.5 40 38" fill="#6B9E3A" opacity="0.88"/>
-      <path d="M40 38 Q28 30 24 18 Q34 20 40 31" fill="#8ABF4E" opacity="0.82"/>
-      <path d="M40 42 Q50 35 55 24 Q46 25 40 34" fill="#A8C080" opacity="0.75"/>
-      <ellipse cx="40" cy="63" rx="7" ry="2" fill="#4A2A10" opacity="0.3"/>
-    </svg>
+    <div class="nav-emblem">
+      <svg width="22" height="22" viewBox="0 0 80 80" fill="none">
+        <path d="M40 68 L40 28" stroke="#AECF8A" stroke-width="3" stroke-linecap="round"/>
+        <path d="M40 50 Q26 41 20 26 Q33 27.5 40 40" fill="#7DB85E"/>
+        <path d="M40 40 Q25 30 21 14 Q34 16.5 40 32" fill="#AECF8A" opacity=".8"/>
+        <path d="M40 45 Q53 36 58 22 Q46 23 40 36" fill="#C8D4A0" opacity=".75"/>
+        <ellipse cx="40" cy="69" rx="8" ry="2.5" fill="#4A2A10" opacity=".25"/>
+      </svg>
+    </div>
     <div class="nav-wordmark">
       <div class="nav-name">Terrava</div>
-      <div class="nav-sub">Agro Consultancy</div>
+      <div class="nav-tagline">Agro Consultancy</div>
     </div>
   </a>
   <div class="nav-links">
     <a href="#services">Services</a>
-    <a href="#process">Our Process</a>
+    <a href="#process">Process</a>
     <a href="#about">About</a>
     <a href="#contact" class="nav-cta">Get in Touch</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ─────── HERO ─────── -->
+
 <section class="hero">
-  <div class="hero-bg-circle1"></div>
-  <div class="hero-bg-circle2"></div>
-  <div class="hero-grain"></div>
+  <div class="hero-mesh"></div>
 
-  <div class="hero-eyebrow">Agro Consultancy· Ahmedabad, Gujarat, India</div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      Agro Consultancy · Ahmedabad, Gujarat, India
+    </div>
 
-  <h1 class="hero-headline">
-    Barren Today.<br/><span class="accent">Alive</span> Tomorrow.
-  </h1>
-  <p class="hero-tagline">Science-led soil restoration for Indian farmland.</p>
-  <p class="hero-body">
-    We help farmers transform exhausted, depleted land into thriving, productive farms through precision soil science, expert crop advisory, and sustainable agronomic practice.
-  </p>
-  <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Start Your Assessment</a>
-    <a href="#services" class="btn-ghost">Explore Services</a>
+```
+<h1 class="hero-headline">
+  <span class="line"><span class="word" style="animation-delay:.3s">Barren</span></span>
+  <span class="line"><span class="word" style="animation-delay:.5s">Today.</span></span>
+  <span class="line" style="margin-top:8px">
+    <span class="word hl" style="animation-delay:.7s">Alive</span>
+  </span>
+  <span class="line">
+    <span class="word hl-gold" style="animation-delay:.9s">Tomorrow.</span>
+  </span>
+</h1>
+
+<div class="hero-divider">
+  <div class="hero-divider-line"></div>
+  <div class="hero-divider-text">Science-led soil restoration for Indian farmland.</div>
+</div>
+
+<p class="hero-body">We help farmers transform exhausted, depleted land into thriving, productive farms through precision soil science, expert crop advisory, and sustainable agronomic practice.</p>
+
+<div class="hero-actions">
+  <a href="#contact" class="btn-primary">
+    Start Your Assessment
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <a href="#services" class="btn-ghost">Explore Services</a>
+</div>
+```
+
   </div>
 
-  <div class="hero-stat-strip">
+  <!-- Botanical Emblem -->
+
+  <div class="hero-right">
+    <div class="botanical-emblem">
+      <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer faint rings -->
+        <circle cx="150" cy="150" r="145" stroke="rgba(174,207,138,0.06)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="130" stroke="rgba(174,207,138,0.06)" stroke-width="0.5"/>
+        <!-- Rotating text ring -->
+        <g class="emblem-rotate">
+          <path id="tr" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0" fill="none"/>
+          <text font-size="9" fill="rgba(174,207,138,0.45)" font-family="'DM Mono',monospace" letter-spacing="3.5">
+            <textPath href="#tr">ICAR CERTIFIED · TERRAVA AGRO · EST 2023 · AHMEDABAD GUJARAT ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</textPath>
+          </text>
+        </g>
+        <!-- Inner circle border -->
+        <circle cx="150" cy="150" r="100" stroke="rgba(174,207,138,0.12)" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- Cross-hair lines -->
+        <line x1="150" y1="50" x2="150" y2="250" stroke="rgba(174,207,138,0.06)" stroke-width="0.5"/>
+        <line x1="50" y1="150" x2="250" y2="150" stroke="rgba(174,207,138,0.06)" stroke-width="0.5"/>
+
+```
+    <!-- Plant group (swaying) -->
+    <g class="plant-sway">
+      <!-- Main stem -->
+      <path d="M150 232 L150 88" stroke="rgba(174,207,138,0.8)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Left leaves -->
+      <path d="M150 180 Q132 168 122 152 Q132 151 143 164 Z" fill="rgba(125,184,94,0.5)" stroke="rgba(174,207,138,0.6)" stroke-width="0.8"/>
+      <path d="M150 158 Q136 148 128 133 Q139 133 148 147 Z" fill="rgba(125,184,94,0.4)" stroke="rgba(174,207,138,0.5)" stroke-width="0.8"/>
+
+      <!-- Right leaves -->
+      <path d="M150 190 Q168 177 178 162 Q166 162 157 175 Z" fill="rgba(125,184,94,0.5)" stroke="rgba(174,207,138,0.6)" stroke-width="0.8"/>
+      <path d="M150 165 Q165 155 174 140 Q163 141 154 153 Z" fill="rgba(125,184,94,0.4)" stroke="rgba(174,207,138,0.5)" stroke-width="0.8"/>
+
+      <!-- Wheat grain head -->
+      <ellipse cx="150" cy="90" rx="5.5" ry="3.5" fill="rgba(200,146,42,0.8)"/>
+      <ellipse cx="147" cy="99" rx="4.5" ry="3" fill="rgba(200,146,42,0.7)"/>
+      <ellipse cx="154" cy="98" rx="4.5" ry="3" fill="rgba(200,146,42,0.7)"/>
+      <ellipse cx="144" cy="107" rx="4" ry="2.5" fill="rgba(200,146,42,0.6)"/>
+      <ellipse cx="157" cy="106" rx="4" ry="2.5" fill="rgba(200,146,42,0.6)"/>
+      <ellipse cx="141" cy="115" rx="3.5" ry="2" fill="rgba(200,146,42,0.5)"/>
+      <ellipse cx="160" cy="114" rx="3.5" ry="2" fill="rgba(200,146,42,0.5)"/>
+    </g>
+
+    <!-- Soil horizon line -->
+    <path d="M70 232 Q110 227 150 229 Q190 231 230 227" stroke="rgba(122,76,46,0.4)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <!-- Soil layer fill hint -->
+    <path d="M70 232 Q110 227 150 229 Q190 231 230 227 L230 260 L70 260 Z" fill="rgba(122,76,46,0.06)"/>
+
+    <!-- Root system (pulse) -->
+    <g class="root-pulse">
+      <path d="M150 232 Q134 244 122 256" stroke="rgba(174,207,138,0.5)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M150 232 Q162 246 172 258" stroke="rgba(174,207,138,0.5)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M150 236 Q146 252 144 266" stroke="rgba(174,207,138,0.4)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M126 256 Q118 264 115 272" stroke="rgba(174,207,138,0.3)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+      <path d="M172 258 Q178 266 180 274" stroke="rgba(174,207,138,0.3)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- Annotation: soil horizon -->
+    <circle cx="150" cy="229" r="2.5" fill="rgba(200,146,42,0.7)"/>
+    <line x1="154" y1="227" x2="186" y2="214" stroke="rgba(200,146,42,0.3)" stroke-width="0.5"/>
+    <text x="188" y="213" font-size="7.5" fill="rgba(200,146,42,0.55)" font-family="'DM Mono',monospace">SOIL HORIZON</text>
+
+    <!-- Annotation: grain -->
+    <circle cx="150" cy="90" r="2" fill="rgba(200,146,42,0.5)"/>
+    <line x1="152" y1="88" x2="178" y2="76" stroke="rgba(200,146,42,0.2)" stroke-width="0.5"/>
+    <text x="180" y="75" font-size="7.5" fill="rgba(200,146,42,0.4)" font-family="'DM Mono',monospace">GRAIN</text>
+
+    <!-- Glow dot center -->
+    <circle cx="150" cy="150" r="3" fill="rgba(200,146,42,0.2)"/>
+    <circle cx="150" cy="150" r="1.5" fill="rgba(200,146,42,0.6)"/>
+  </svg>
+</div>
+```
+
+  </div>
+
+  <!-- Stats strip -->
+
+  <div class="hero-stats">
     <div class="hero-stat">
-      <div class="stat-num">10+</div>
+      <div class="stat-num" data-count="10" data-suffix="+">10+</div>
       <div class="stat-label">Farms Restored</div>
     </div>
     <div class="hero-stat">
-      <div class="stat-num">6</div>
+      <div class="stat-num" data-count="6">6</div>
       <div class="stat-label">Districts Covered</div>
     </div>
     <div class="hero-stat">
-      <div class="stat-num">80%</div>
+      <div class="stat-num" data-count="80" data-suffix="%">80%</div>
       <div class="stat-label">Yield Improvement Rate</div>
     </div>
     <div class="hero-stat">
@@ -542,270 +1197,351 @@ footer {
   </div>
 </section>
 
-<!-- ── INTRO BAND ── -->
-<section class="intro-band reveal">
-  <div class="intro-left">
+<!-- ─────── MARQUEE ─────── -->
+
+<div class="marquee-strip">
+  <div class="marquee-inner" id="marquee">
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">ICAR Certified Protocols</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Multi-Season Crop Tracking</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Farmer-First Advisory</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">6 Districts Covered</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Gujarat State Agri. Dept. Guidelines</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Lab-Grade Soil Analysis</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Est. 2023 · Ahmedabad</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">ICAR Certified Protocols</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Multi-Season Crop Tracking</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Farmer-First Advisory</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">6 Districts Covered</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Gujarat State Agri. Dept. Guidelines</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Lab-Grade Soil Analysis</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Est. 2023 · Ahmedabad</span></span>
+  </div>
+</div>
+
+<!-- ─────── INTRO ─────── -->
+
+<section class="intro" id="about-intro">
+  <div class="reveal">
     <div class="section-eyebrow">Who We Are</div>
     <h2 class="intro-heading">The agronomists who go to the <em>field first.</em></h2>
-    <p class="intro-body">
-      Terrava Agro Consultancy was founded on a single belief: every piece of degraded farmland holds the potential for renewal. We pair laboratory grade soil science with deep knowledge of Gujarat's soils, seasons, and crops  translating data into decisions farmers can act on.
-    </p>
+    <p class="intro-body">Terrava Agro Consultancy was founded on a single belief: every piece of degraded farmland holds the potential for renewal. We pair laboratory-grade soil science with deep knowledge of Gujarat's soils, seasons, and crops — translating data into decisions farmers can act on.</p>
   </div>
-  <div class="intro-right">
-    <div class="intro-pill">
-      <div class="pill-dot" style="background:#6B9E3A;"></div>
-      <div class="pill-text">ICAR-certified soil testing protocols</div>
+  <div class="intro-right reveal reveal-delay-2">
+    <div class="feature-card">
+      <div class="fc-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M9 20H6a3 3 0 01-3-3V7a3 3 0 013-3h12a3 3 0 013 3v10a3 3 0 01-3 3h-3"/><path d="M9 12h6M9 16h4"/></svg>
+      </div>
+      <div class="fc-title">ICAR-Certified Protocols</div>
+      <div class="fc-body">All analysis follows ICAR standards for consistent, defensible results.</div>
     </div>
-    <div class="intro-pill">
-      <div class="pill-dot" style="background:#A85D2A;"></div>
-      <div class="pill-text">Multi-season crop outcome tracking</div>
+    <div class="feature-card">
+      <div class="fc-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="fc-title">Multi-Season Tracking</div>
+      <div class="fc-body">We follow outcomes across complete crop cycles, not just one harvest.</div>
     </div>
-    <div class="intro-pill">
-      <div class="pill-dot" style="background:#C9BC8A;"></div>
-      <div class="pill-text">Farmer-first, plain-language advisory</div>
+    <div class="feature-card">
+      <div class="fc-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="fc-title">Farmer-First Advisory</div>
+      <div class="fc-body">Plain language. Practical steps. No jargon. Real timelines.</div>
     </div>
-    <div class="intro-pill">
-      <div class="pill-dot" style="background:#2C4A1E;"></div>
-      <div class="pill-text">On-site visits across 6 districts</div>
+    <div class="feature-card">
+      <div class="fc-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="fc-title">On-Site Visits · 6 Districts</div>
+      <div class="fc-body">We come to your farm. Assessment starts in the field, not a lab.</div>
     </div>
   </div>
 </section>
 
-<!-- ── SERVICES ── -->
+<!-- ─────── SERVICES ─────── -->
+
 <section class="services" id="services">
-  <div class="section-header reveal">
-    <div class="section-eyebrow" style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:var(--earth-mid);margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-      <span style="display:inline-block;width:24px;height:0.5px;background:var(--earth-mid);"></span>What We Do
-    </div>
-    <h2 class="section-title">Three ways we <em>revive</em> your land.</h2>
-    <p class="section-sub">Every engagement begins with the soil. We look, measure, and then prescribe never the other way around.</p>
-  </div>
-
-  <div class="services-grid reveal">
-    <!-- Large card -->
-    <div class="service-card sc-1 sc-span on-dark">
-      <div>
-        <div class="service-num">01</div>
-        <svg width="40" height="40" viewBox="0 0 80 80" fill="none" class="service-icon">
-          <circle cx="40" cy="40" r="40" fill="rgba(168,192,128,0.15)"/>
-          <path d="M40 64 L40 28" stroke="#A8C080" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M40 48 Q28 40 22 26 Q33 27.5 40 38" fill="#6B9E3A" opacity="0.88"/>
-          <path d="M40 40 Q26 30 22 16 Q34 18 40 32" fill="#8ABF4E" opacity="0.8"/>
-          <path d="M40 44 Q52 36 58 22 Q47 23 40 34" fill="#A8C080" opacity="0.75"/>
-          <ellipse cx="40" cy="65" rx="9" ry="2.5" fill="#4A2A10" opacity="0.3"/>
-        </svg>
-        <div class="service-name">Soil Health</div>
-        <div class="service-heading">Dead soil brought<br/>back to life.</div>
-        <p class="service-desc">Full laboratory analysis of organic carbon, nitrogen, phosphorus, pH, and microbial density. We identify exactly what your soil is lacking and prescribe a restoration programme with measurable milestones. Results tracked over two complete crop cycles.</p>
-      </div>
-      <div style="margin-top:32px;padding-top:24px;border-top:0.5px solid rgba(168,192,128,0.15);">
-        <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-pale);">Includes</div>
-        <div style="font-size:12px;color:rgba(239,232,216,0.55);margin-top:10px;line-height:2;font-weight:300;">
-          Soil sampling & lab analysis · Nutrient mapping · Amendment prescription · Seasonal review
-        </div>
-      </div>
-    </div>
-
-    <!-- Top right -->
-    <div class="service-card sc-2 on-cream">
-      <div class="service-num">02</div>
-      <div class="service-name">Crop Advisory</div>
-      <div class="service-heading">Right crops<br/>for your land.</div>
-      <p class="service-desc">Precision variety selection, sowing schedules, and input planning matched to your verified soil profile and local micro climate.</p>
-    </div>
-
-    <div class="service-card sc-3 on-earth">
-      <div class="service-num">03</div>
-      <div class="service-name">Farm Planning</div>
-      <div class="service-heading">Your model farm,<br/>planned out.</div>
-      <p class="service-desc">Comprehensive design covering irrigation layout, crop rotation, intercropping strategies, and long term land health milestones.</p>
-    </div>
-
-    <!-- Bottom right -->
-    <div class="service-card sc-4 on-cream">
-      <div class="service-num">04</div>
-      <div class="service-name">Water Management</div>
-      <div class="service-heading">Every drop<br/>directed wisely.</div>
-      <p class="service-desc">Drip irrigation guidance, rainwater harvesting plans, and soil moisture management to reduce water use while improving root zone health.</p>
-    </div>
-
-    <div class="service-card sc-5 on-mid">
-      <div class="service-num">05</div>
-      <div class="service-name">Ongoing Monitoring</div>
-      <div class="service-heading">We stay,<br/>season to season.</div>
-      <p class="service-desc">Quarterly field visits, real time advisory via phone, and annual soil reassessment to track and adapt your land health programme.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── PROCESS ── -->
-<section class="process" id="process">
-  <div class="process-header reveal">
-    <div class="process-eyebrow">Our Method</div>
-    <h2 class="process-title">How we work<br/>with your <em>farm.</em></h2>
-  </div>
-  <div class="process-steps reveal">
-    <div class="process-step">
-      <div class="step-num">01</div>
-      <div class="step-name">Assessment</div>
-      <div class="step-title">We come to you first.</div>
-      <p class="step-desc">On site farm visit, soil sampling from multiple grid points, and a full farmer interview to understand history, crop patterns, and ambitions.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">02</div>
-      <div class="step-name">Analysis</div>
-      <div class="step-title">Science in the lab.</div>
-      <p class="step-desc">All samples processed in ICAR affiliated labs. Full nutrient panel, organic matter content, microbial load, and water retention capacity.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">03</div>
-      <div class="step-name">Prescription</div>
-      <div class="step-title">A plan, not a report.</div>
-      <p class="step-desc">Detailed, season by season action plan written in plain language. Covers soil amendments, crop choices, irrigation, and input scheduling.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">04</div>
-      <div class="step-name">Monitoring</div>
-      <div class="step-title">We track. We adapt.</div>
-      <p class="step-desc">Quarterly field reviews, yield tracking, and annual re analysis. We adjust the programme as conditions change droughts, pest pressure, or market shifts.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-<section class="testimonials" id="testimonials">
-  <div class="testimonials-header reveal">
+  <div class="services-header reveal">
     <div>
-      <div class="section-eyebrow" style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:var(--earth-mid);margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-        <span style="display:inline-block;width:24px;height:0.5px;background:var(--earth-mid);"></span>From the Field
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Five ways we <em>revive</em> your land.</h2>
+    </div>
+    <p class="section-sub">Every engagement begins with the soil. We look, measure, and then prescribe — never the other way around.</p>
+  </div>
+
+  <div class="bento reveal">
+    <!-- Large featured card -->
+    <div class="bento-card bc-dark">
+      <div class="bc-bg-num">01</div>
+      <div class="bc-num">01</div>
+      <div class="bc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
       </div>
-      <h2 class="section-title" style="font-size:40px;">Farmers who saw the<br/><em>land come back.</em></h2>
+      <div class="bc-label">Soil Health</div>
+      <div class="bc-heading">Dead soil<br/>brought back<br/>to life.</div>
+      <p class="bc-desc">Full laboratory analysis of organic carbon, nitrogen, phosphorus, pH, and microbial density. We identify exactly what your soil is lacking and prescribe a restoration programme with measurable milestones tracked over two complete crop cycles.</p>
+      <div class="bc-footer">
+        <div class="bc-includes">Includes</div>
+        <div class="bc-includes-list">Soil sampling & lab analysis · Nutrient mapping<br/>Amendment prescription · Seasonal review</div>
+      </div>
+    </div>
+
+```
+<!-- Top row right -->
+<div class="bento-card bc-gold">
+  <div class="bc-bg-num">02</div>
+  <div class="bc-num">02</div>
+  <div class="bc-label">Crop Advisory</div>
+  <div class="bc-heading">Right crops<br/>for your land.</div>
+  <p class="bc-desc">Precision variety selection, sowing schedules, and input planning matched to your verified soil profile.</p>
+</div>
+
+<div class="bento-card bc-ash">
+  <div class="bc-bg-num">03</div>
+  <div class="bc-num">03</div>
+  <div class="bc-label">Farm Planning</div>
+  <div class="bc-heading">Your model farm,<br/>planned out.</div>
+  <p class="bc-desc">Irrigation layout, crop rotation, intercropping strategies, and long-term land health milestones.</p>
+</div>
+
+<!-- Bottom row right -->
+<div class="bento-card bc-moss">
+  <div class="bc-bg-num">04</div>
+  <div class="bc-num">04</div>
+  <div class="bc-label">Water Management</div>
+  <div class="bc-heading">Every drop<br/>directed wisely.</div>
+  <p class="bc-desc">Drip irrigation, rainwater harvesting, and soil moisture management to cut waste while improving root zone health.</p>
+</div>
+
+<div class="bento-card bc-fern">
+  <div class="bc-bg-num">05</div>
+  <div class="bc-num">05</div>
+  <div class="bc-label">Ongoing Monitoring</div>
+  <div class="bc-heading">We stay,<br/>season to season.</div>
+  <p class="bc-desc">Quarterly field visits, real-time advisory, and annual soil reassessment to track and adapt your programme.</p>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ─────── PROCESS ─────── -->
+
+<section class="process" id="process">
+  <div class="process-bg"></div>
+  <div class="process-header reveal">
+    <div>
+      <div class="section-eyebrow" style="color:var(--reed)">Our Method</div>
+      <h2 class="process-title">How we work<br/>with your <em>farm.</em></h2>
+    </div>
+    <p class="process-desc">A repeatable, science-backed framework applied to every farm we work with. No shortcuts. No guesswork.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-step">
+      <div class="ts-dot"><div class="ts-dot-num">01</div></div>
+      <div class="ts-phase">Assessment</div>
+      <div class="ts-title">We come to you first.</div>
+      <p class="ts-body">On-site farm visit, soil sampling from multiple grid points, and a full farmer interview to understand history, crop patterns, and ambitions.</p>
+    </div>
+    <div class="timeline-step">
+      <div class="ts-dot"><div class="ts-dot-num">02</div></div>
+      <div class="ts-phase">Analysis</div>
+      <div class="ts-title">Science in the lab.</div>
+      <p class="ts-body">All samples processed in ICAR-affiliated labs. Full nutrient panel, organic matter content, microbial load, and water retention capacity.</p>
+    </div>
+    <div class="timeline-step">
+      <div class="ts-dot"><div class="ts-dot-num">03</div></div>
+      <div class="ts-phase">Prescription</div>
+      <div class="ts-title">A plan, not a report.</div>
+      <p class="ts-body">Detailed, season-by-season action plan written in plain language. Covers soil amendments, crop choices, irrigation, and input scheduling.</p>
+    </div>
+    <div class="timeline-step">
+      <div class="ts-dot"><div class="ts-dot-num">04</div></div>
+      <div class="ts-phase">Monitoring</div>
+      <div class="ts-title">We track. We adapt.</div>
+      <p class="ts-body">Quarterly field reviews, yield tracking, and annual re-analysis. We adjust as conditions change — droughts, pest pressure, market shifts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────── NUMBERS STRIP ─────── -->
+
+<div class="numbers-strip">
+  <div class="num-item">
+    <div class="big-num" data-count="10" data-suffix="+">10+</div>
+    <div class="num-label">Farms Restored</div>
+    <div class="num-desc">Across depleted, over-cultivated farmland in Gujarat</div>
+  </div>
+  <div class="num-item">
+    <div class="big-num" data-count="6">6</div>
+    <div class="num-label">Districts Active</div>
+    <div class="num-desc">Covering Anand, Mehsana, Sabarmati, and beyond</div>
+  </div>
+  <div class="num-item">
+    <div class="big-num" data-count="80" data-suffix="%">80%</div>
+    <div class="num-label">Yield Improvement</div>
+    <div class="num-desc">Average reported by farmers after full soil programme</div>
+  </div>
+  <div class="num-item">
+    <div class="big-num">8+</div>
+    <div class="num-label">Expert Team</div>
+    <div class="num-desc">Agronomists, soil scientists, plant pathologist, entomologist</div>
+  </div>
+</div>
+
+<!-- ─────── TESTIMONIALS ─────── -->
+
+<section class="testimonials">
+  <div class="testi-bg-q">"</div>
+  <div class="testi-header reveal">
+    <div>
+      <div class="section-eyebrow">From the Field</div>
+      <h2 class="section-title">Farmers who saw the<br/><em>land come back.</em></h2>
     </div>
   </div>
 
   <div class="testi-grid reveal">
     <div class="testi-card featured">
       <div>
-        <svg width="28" height="28" viewBox="0 0 80 80" fill="none" style="margin-bottom:20px;">
-          <circle cx="40" cy="40" r="40" fill="rgba(168,192,128,0.15)"/>
-          <path d="M40 62 L40 30" stroke="#A8C080" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M40 46 Q30 39 25 28 Q34 29.5 40 38" fill="#6B9E3A" opacity="0.88"/>
-          <path d="M40 42 Q50 35 55 24 Q46 25 40 34" fill="#A8C080" opacity="0.75"/>
-        </svg>
-        <p class="testi-quote">"Three seasons ago I was ready to sell the land. Today we have our highest cotton yield in twelve years. Terrava didn't just test the soil they stayed with us through every decision."</p>
+        <span class="testi-open">"</span>
+        <p class="testi-quote">Three seasons ago I was ready to sell the land. Today we have our highest cotton yield in twelve years. Terrava didn't just test the soil — they stayed with us through every decision.</p>
       </div>
       <div>
-        <div class="testi-rule"></div>
+        <div class="testi-sep"></div>
         <div class="testi-author">Mukesh Patel</div>
         <div class="testi-farm">Dharti Farm · Anand District · Cotton &amp; Groundnut</div>
       </div>
     </div>
     <div class="testi-stack">
       <div class="testi-card testi-small">
-        <p class="testi-quote">"The soil report they gave us was the first time I actually understood what was wrong with my land. The amendment plan paid for itself in one season."</p>
-        <div class="testi-rule"></div>
-        <div class="testi-author">Rekha Desai</div>
-        <div class="testi-farm">Sabarmati Basin · Wheat &amp; Mustard</div>
-      </div>
-      <div class="testi-card testi-small">
-        <p class="testi-quote">"Our water usage dropped by almost a third after we followed their irrigation plan. Same crops, better yield, less expense."</p>
-        <div class="testi-rule"></div>
-        <div class="testi-author">Dinesh Vaghela</div>
-        <div class="testi-farm">Mehsana District · Cumin &amp; Vegetables</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── ABOUT ── -->
-<section class="about" id="about">
-  <div class="about-visual reveal">
-    <div class="about-logo-big">
-      <svg width="56" height="56" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="40" fill="#2C4A1E"/>
-        <path d="M40 62 L40 30" stroke="#A8C080" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M40 46 Q30 39 25 28 Q34 29.5 40 38" fill="#6B9E3A" opacity="0.88"/>
-        <path d="M40 38 Q28 30 24 18 Q34 20 40 31" fill="#8ABF4E" opacity="0.82"/>
-        <path d="M40 42 Q50 35 55 24 Q46 25 40 34" fill="#A8C080" opacity="0.75"/>
-        <ellipse cx="40" cy="63" rx="7" ry="2" fill="#4A2A10" opacity="0.3"/>
-      </svg>
-      <div>
-        <div class="about-name-big">Terrava</div>
-        <div class="about-sub-big">Agro Consultancy</div>
-        <div class="about-tagline-big">Barren Today. Alive Tomorrow.</div>
-      </div>
-    </div>
-    <div class="about-divider"></div>
-    <div class="cred-list">
-      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">Est. 2023 · Ahmedabad, Gujarat</div></div>
-      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">SOBO Center, South Bopal, Ahmedabad, Gujarat</div></div>
-      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">Following Guidelines of Gujarat State Agriculture Department.</div></div>
-      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">ICAR collaborating laboratory partner</div></div>
-      <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">Team of 5 Agronomist, 1 Soil Scientist, 1 Plant Pathologist, 1 Entamologist</div></div>
-    </div>
-  </div>
-  <div class="about-text-side reveal">
-    <div class="section-eyebrow" style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:var(--earth-mid);margin-bottom:20px;display:flex;align-items:center;gap:12px;">
-      <span style="display:inline-block;width:24px;height:0.5px;background:var(--earth-mid);"></span>About Terrava
-    </div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--green-deep);line-height:1.15;letter-spacing:0.01em;">
-      Built by agronomists<br/>for <em style="font-style:italic;color:var(--earth-mid);">farmers first.</em>
-    </h2>
-    <p class="about-body" style="margin-top:22px;">
-      Terrava Agro was founded in 2016 by a team of agronomists and soil scientists who had spent years watching good farmland deteriorate through over-cultivation, poor input practices, and lack of professional guidance.
-    </p>
-    <p class="about-body">
-      Our name comes from the land itself — <em>terra</em>, earth. We believe every field holds the chemistry and biology it needs to recover. Our role is to read it correctly, and then prescribe with precision.
-    </p>
-    <div class="about-values">
-      <div class="value-item">
-        <div class="value-name">Science-led</div>
-        <div class="value-desc">Lab data drives every recommendation. No guesswork.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-name">Farmer-first</div>
-        <div class="value-desc">Plain language. Practical steps. Real timelines.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-name">Long-term</div>
-        <div class="value-desc">We track outcomes, not just outputs.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-name">Sustainable</div>
-        <div class="value-desc">Soil health that improves year on year.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section class="contact-section" id="contact">
-  <div class="contact-left reveal">
-    <div class="section-eyebrow" style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:var(--earth-mid);margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-      <span style="display:inline-block;width:24px;height:0.5px;background:var(--earth-mid);"></span>Get in Touch
-    </div>
-    <h2 class="contact-heading">Let's talk about<br/>your <em>land.</em></h2>
-    <p class="contact-sub">We visit first, advise second. Reach out to arrange a no-obligation farm visit anywhere across Gujarat.</p>
-    <div class="contact-details">
-      <div class="contact-detail">
         <div>
-          <div class="cd-label">Office</div>
-          <div class="cd-value">SOBO Center<br/>South Bopal, Ahmedabad<br/>Gujarat — 380 058</div>
+          <span class="testi-open" style="font-size:36px">"</span>
+          <p class="testi-quote">The soil report they gave us was the first time I actually understood what was wrong with my land. The amendment plan paid for itself in one season.</p>
+        </div>
+        <div>
+          <div class="testi-sep"></div>
+          <div class="testi-author">Rekha Desai</div>
+          <div class="testi-farm">Sabarmati Basin · Wheat &amp; Mustard</div>
         </div>
       </div>
-      <div class="contact-detail">
+      <div class="testi-card testi-small">
+        <div>
+          <span class="testi-open" style="font-size:36px">"</span>
+          <p class="testi-quote">Our water usage dropped by almost a third after we followed their irrigation plan. Same crops, better yield, less expense.</p>
+        </div>
+        <div>
+          <div class="testi-sep"></div>
+          <div class="testi-author">Dinesh Vaghela</div>
+          <div class="testi-farm">Mehsana District · Cumin &amp; Vegetables</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────── ABOUT ─────── -->
+
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <div class="about-card-bg"></div>
+      <div class="about-card-content">
+        <div class="about-brand-row">
+          <svg width="52" height="52" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="40" fill="rgba(174,207,138,0.12)"/>
+            <path d="M40 64 L40 28" stroke="#AECF8A" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M40 48 Q26 39 20 24 Q33 25.5 40 38" fill="#7DB85E" opacity=".88"/>
+            <path d="M40 38 Q25 28 21 13 Q34 15.5 40 30" fill="#AECF8A" opacity=".8"/>
+            <path d="M40 44 Q53 35 58 21 Q46 22 40 34" fill="#C8D4A0" opacity=".75"/>
+            <ellipse cx="40" cy="65" rx="8" ry="2.5" fill="#4A2A10" opacity=".25"/>
+          </svg>
+          <div>
+            <div class="about-brand-name">Terrava</div>
+            <div class="about-brand-sub">Agro Consultancy</div>
+            <div class="about-brand-tag">Barren Today. Alive Tomorrow.</div>
+          </div>
+        </div>
+        <div class="about-divider"></div>
+        <div class="cred-list">
+          <div class="cred-item"><div class="cred-bullet"></div><div class="cred-text">Est. 2023 · Ahmedabad, Gujarat</div></div>
+          <div class="cred-item"><div class="cred-bullet"></div><div class="cred-text">SOBO Center, South Bopal, Ahmedabad — 380 058</div></div>
+          <div class="cred-item"><div class="cred-bullet"></div><div class="cred-text">Gujarat State Agriculture Department Guidelines</div></div>
+          <div class="cred-item"><div class="cred-bullet"></div><div class="cred-text">ICAR Collaborating Laboratory Partner</div></div>
+          <div class="cred-item"><div class="cred-bullet"></div><div class="cred-text">Team of 5 Agronomists · 1 Soil Scientist · 1 Plant Pathologist · 1 Entomologist</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-text">ICAR<br/>CERTIFIED<br/>LAB</div>
+    </div>
+  </div>
+
+  <div class="about-text reveal reveal-delay-2">
+    <div class="section-eyebrow">About Terrava</div>
+    <h2 class="section-title" style="font-size:clamp(34px,3.8vw,48px)">Built by agronomists<br/>for <em>farmers first.</em></h2>
+    <p class="about-body" style="margin-top:24px">Terrava Agro was founded by a team of agronomists and soil scientists who had spent years watching good farmland deteriorate through over-cultivation, poor input practices, and lack of professional guidance.</p>
+    <p class="about-body">Our name comes from the land itself — <em>terra</em>, earth. We believe every field holds the chemistry and biology it needs to recover. Our role is to read it correctly, and then prescribe with precision.</p>
+    <div class="about-values">
+      <div class="value-item">
+        <div class="vi-title">Science-led</div>
+        <div class="vi-body">Lab data drives every recommendation. No guesswork, no assumptions.</div>
+      </div>
+      <div class="value-item">
+        <div class="vi-title">Farmer-first</div>
+        <div class="vi-body">Plain language. Practical steps. Real, achievable timelines.</div>
+      </div>
+      <div class="value-item">
+        <div class="vi-title">Long-term</div>
+        <div class="vi-body">We track outcomes over seasons, not just immediate outputs.</div>
+      </div>
+      <div class="value-item">
+        <div class="vi-title">Sustainable</div>
+        <div class="vi-body">Soil health that improves year on year — not depleted further.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────── CONTACT ─────── -->
+
+<section class="contact" id="contact">
+  <div class="contact-intro reveal">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="contact-heading">Let's talk<br/>about your<br/><em>land.</em></h2>
+    <p class="contact-sub">We visit first, advise second. Reach out to arrange a no-obligation farm visit anywhere across Gujarat.</p>
+    <div class="contact-details">
+      <div class="cd-row">
+        <div class="cd-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="cd-label">Office</div>
+          <div class="cd-value">SOBO Center, South Bopal<br/>Ahmedabad, Gujarat — 380 058</div>
+        </div>
+      </div>
+      <div class="cd-row">
+        <div class="cd-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.27 2 2 0 012.07.1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
         <div>
           <div class="cd-label">Phone</div>
           <div class="cd-value">+91 99771 04545</div>
         </div>
       </div>
-      <div class="contact-detail">
+      <div class="cd-row">
+        <div class="cd-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
         <div>
           <div class="cd-label">Email</div>
           <div class="cd-value">chharipratik@gmail.com</div>
         </div>
       </div>
-      <div class="contact-detail">
+      <div class="cd-row">
+        <div class="cd-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AECF8A" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <div>
           <div class="cd-label">Field Hours</div>
           <div class="cd-value">Mon – Sat · 9 AM to 5 PM</div>
@@ -813,8 +1549,9 @@ footer {
       </div>
     </div>
   </div>
-  <div class="contact-form reveal">
-    <div class="form-title">Request a Farm Visit</div>
+
+  <div class="contact-form reveal reveal-delay-2">
+    <div class="form-title">Request a <em>Farm Visit</em></div>
     <div class="form-row">
       <div class="form-field">
         <label class="form-label">Your Name</label>
@@ -840,70 +1577,146 @@ footer {
         <option>Other</option>
       </select>
     </div>
-    <div class="form-field">
+    <div class="form-field" style="margin-bottom:6px">
       <label class="form-label">Tell us more (optional)</label>
-      <textarea class="form-textarea" placeholder="Any additional details about your land or situation…"></textarea>
+      <textarea class="form-textarea" placeholder="Describe your land, current crops, or specific challenges…"></textarea>
     </div>
     <button class="form-btn">Send Request →</button>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ─────── FOOTER ─────── -->
+
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div style="display:flex;align-items:center;gap:14px;">
-        <svg width="38" height="38" viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="40" fill="rgba(168,192,128,0.15)"/>
-          <path d="M40 62 L40 30" stroke="#A8C080" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M40 46 Q30 39 25 28 Q34 29.5 40 38" fill="#6B9E3A" opacity="0.88"/>
-          <path d="M40 38 Q28 30 24 18 Q34 20 40 31" fill="#8ABF4E" opacity="0.82"/>
-          <path d="M40 42 Q50 35 55 24 Q46 25 40 34" fill="#A8C080" opacity="0.75"/>
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:4px">
+        <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="40" fill="rgba(174,207,138,0.12)"/>
+          <path d="M40 62 L40 28" stroke="#AECF8A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M40 48 Q26 39 20 24 Q33 25.5 40 38" fill="#7DB85E" opacity=".88"/>
+          <path d="M40 38 Q25 28 21 13 Q34 15.5 40 30" fill="#AECF8A" opacity=".8"/>
+          <path d="M40 44 Q53 35 58 21 Q46 22 40 34" fill="#C8D4A0" opacity=".75"/>
         </svg>
         <div>
           <div class="footer-name">Terrava</div>
-          <div class="footer-sub">Agro Consultancy</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:rgba(174,207,138,.35);margin-top:3px">Agro Consultancy</div>
         </div>
       </div>
-      <div class="footer-tag" style="margin-top:14px;">Barren Today. Alive Tomorrow.</div>
+      <div class="footer-tagline">Barren Today. Alive Tomorrow.</div>
+      <p class="footer-about">Founded by agronomists and soil scientists committed to reversing farmland degradation across Gujarat through precision soil science.</p>
     </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <div class="footer-col-title">Services</div>
-        <a href="#">Soil Health</a>
-        <a href="#">Crop Advisory</a>
-        <a href="#">Farm Planning</a>
-        <a href="#">Water Management</a>
-        <a href="#">Ongoing Monitoring</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Company</div>
-        <a href="#">About Us</a>
-        <a href="#">Our Team</a>
-        <a href="#">Case Studies</a>
-        <a href="#">Research</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <p>chharipratik@gmail.com</p>
-        <p>+91 9977104545</p>
-        <p>SOBO Center, South Bopal, Ahmedabad, Gujarat</p>
-      </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <a href="#">Soil Health</a>
+      <a href="#">Crop Advisory</a>
+      <a href="#">Farm Planning</a>
+      <a href="#">Water Management</a>
+      <a href="#">Ongoing Monitoring</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <a href="#">About Us</a>
+      <a href="#">Our Team</a>
+      <a href="#">Case Studies</a>
+      <a href="#">Research</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:chharipratik@gmail.com">chharipratik@gmail.com</a>
+      <a href="tel:+919977104545">+91 9977104545</a>
+      <p>SOBO Center, South Bopal</p>
+      <p>Ahmedabad, Gujarat</p>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 Terrava Agro Consultancy. All rights reserved.</div>
-    <div class="footer-reg">Gujarat MSME Reg. · GSTIN 24XXXXX0000X1Z5</div>
   </div>
 </footer>
 
 <script>
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
+// ── Custom Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.bento-card,.feature-card,.testi-card,.value-item,.timeline-step').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '18px'; cursor.style.height = '18px';
+    ring.style.width = '52px'; ring.style.height = '52px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '10px'; cursor.style.height = '10px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// ── Progress bar
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+});
+
+// ── Nav scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.08 });
-reveals.forEach(el => io.observe(el));
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('up'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+
+// ── Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(update);
+}
+const counterEls = document.querySelectorAll('[data-count]');
+const counterIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounter(e.target); counterIO.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+counterEls.forEach(el => counterIO.observe(el));
+
+// ── Parallax on botanical emblem
+const emblem = document.querySelector('.botanical-emblem');
+if (emblem) {
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 16;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    emblem.style.transform = `translate(${x}px, ${y}px)`;
+  });
+}
 </script>
+
 </body>
 </html>
